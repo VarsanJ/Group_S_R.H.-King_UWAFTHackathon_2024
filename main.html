@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitQuest</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1c1c1c;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #2d2d2d;
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+        }
+        .profile img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            overflow: hidden;
+        }
+        .streak-counter {
+            background: #3d3d3d;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .streak-counter input {
+            margin-right: 10px;
+        }
+        .streak-badge {
+            font-size: 24px;
+            color: #ffcc00;
+        }
+        main {
+            padding: 20px;
+        }
+        .leaderboard {
+            margin-top: 20px;
+            background: #2d2d2d;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .leaderboard h3 {
+            margin: 0;
+            margin-bottom: 10px;
+        }
+        .leaderboard table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .leaderboard th, .leaderboard td {
+            text-align: left;
+            padding: 10px;
+        }
+        .leaderboard th {
+            background: #444;
+        }
+        .leaderboard tr:nth-child(even) {
+            background: #3d3d3d;
+        }
+        .footer-menu {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            background: #2d2d2d;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .footer-menu button {
+            background: #444;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .footer-menu button:hover {
+            background: #555;
+        }
+        /* New style for the distance and steps section */
+        .distance-section {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #2d2d2d;
+            border-radius: 10px;
+        }
+        .distance-section form {
+            display: flex;
+            flex-direction: column;
+        }
+        .distance-section label {
+            margin-bottom: 5px;
+        }
+        .distance-section input {
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .distance-section button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .distance-section button:hover {
+            background-color: #45a049;
+        }
+        .distance-result {
+            margin-top: 10px;
+            color: #ffcc00;
+        }
+        /* Add a button to add pitstop */
+        .add-pitstop-button {
+            background-color: #2196F3;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .add-pitstop-button:hover {
+            background-color: #0b7dda;
+        }
+
+        /* Style the outer container */
+        .exp-bar-container {
+            width: 100%;
+            max-width: 500px; /* Optional: limit the width */
+            height: 30px;
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            border: 2px solid #ccc;
+            margin: 40px 0;
+            margin-left: 15%;
+            position: relative;
+        }
+
+        /* Style the inner progress bar */
+        .exp-bar {
+            height: 100%;
+            width: 70%; /* Set the progress to 70% for the mockup */
+            background-color: #4CAF50;
+            border-radius: 15px;
+            transition: width 0.5s ease; /* Optional smooth transition */
+        }
+
+        /* Optional: Add text inside the EXP bar */
+        .exp-text {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            color: #fff;
+            font-weight: bold;
+            line-height: 30px; /* Center the text vertically */
+        }
+
+        /* New section for calories burned */
+        .calories-section {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #2d2d2d;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .calories-section h3 {
+            margin-bottom: 10px;
+        }
+        .calories-section p {
+            color: #ffcc00;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="streak-counter">
+        <div>
+            <label><input type="checkbox" id="steps"> Walk 10k steps</label>
+        </div>
+        <div>
+            <label><input type="checkbox" id="calories"> Burn 200 calories</label>
+        </div>
+        <div>
+            <label><input type="checkbox" id="sleep"> Sleep 9 hours</label>
+        </div>
+        <div class="streak-badge">
+            Streak: <span id="streak">0</span>
+        </div>
+    </div>
+    <div class="profile">
+        <a href="profile.html">
+            <img src="Sharuya.JPG" alt="User Picture">
+        </a>
+        <script>
+            var usern = localStorage.getItem("username");
+        </script>
+        <div>
+            <h2>Welcome, <span id="name">User</span>!</h2>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- EXP bar container with progress bar and text -->
+    <div class="exp-bar-container">
+        <div class="exp-bar"></div>
+        <div class="exp-text">70% EXP</div> <!-- Example: 70% EXP -->
+    </div>
+
+    <!-- New Calories Burned Section -->
+    <div class="calories-section">
+        <h3>Estimated Calories Burned</h3>
+        <p id="calories-burned">0 kcal</p> <!-- Will update dynamically -->
+    </div>
+
+    <div class="leaderboard">
+        <h3>Daily Leaderboard</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Streak</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Varsan</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>Nabil</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>Shaurya</td>
+                    <td>8</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Distance and Steps Calculation -->
+    <div class="distance-section">
+        <h3>Calculate Distance and Steps (Including Pitstop)</h3>
+        <form id="distanceForm">
+            <label for="lat1">Latitude 1:</label>
+            <input type="number" id="lat1" name="lat1" step="any" required>
+            <label for="lon1">Longitude 1:</label>
+            <input type="number" id="lon1" name="lon1" step="any" required>
+            <br>
+            <label for="lat2">Latitude 2:</label>
+            <input type="number" id="lat2" name="lat2" step="any" required>
+            <label for="lon2">Longitude 2:</label>
+            <input type="number" id="lon2" name="lon2" step="any" required>
+            <br>
+            <button type="submit">Calculate</button>
+        </form>
+
+        <!-- Button to add pitstop -->
+        <button class="add-pitstop-button" id="addPitstopBtn">Add Pitstop</button>
+
+        <div id="pitstopInputs"></div>
+        <div id="distanceResult" class="distance-result"></div>
+    </div>
+</main>
+
+<script>
+    // Haversine formula to calculate the distance between two lat/lon points
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+        const R = 6371; // Earth's radius in kilometers
+        const phi1 = lat1 * Math.PI / 180; // Convert to radians
+        const phi2 = lat2 * Math.PI / 180; // Convert to radians
+        const deltaPhi = (lat2 - lat1) * Math.PI / 180;
+        const deltaLambda = (lon2 - lon1) * Math.PI / 180;
+
+        const a = Math.sin(deltaPhi / 2) * Math.sin(deltaPhi / 2) +
+                  Math.cos(phi1) * Math.cos(phi2) *
+                  Math.sin(deltaLambda / 2) * Math.sin(deltaLambda / 2);
+
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        const distance = R * c; // Distance in kilometers
+        return distance;
+    }
+
+    // Function to calculate steps based on distance
+    function calculateSteps(distance) {
+        const stepsPerKm = 1250; // Average steps per km
+        const steps = distance * stepsPerKm;
+        return steps;
+    }
+
+    // Function to calculate estimated calories burned (0.04 calories per step)
+    function calculateCalories(steps) {
+        const caloriesPerStep = 0.04; // Average calories burned per step
+        return steps * caloriesPerStep;
+    }
+
+    // Event listener for the form submission
+    document.getElementById('distanceForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Get the coordinates from the input fields
+        const lat1 = parseFloat(document.getElementById('lat1').value);
+        const lon1 = parseFloat(document.getElementById('lon1').value);
+        const lat2 = parseFloat(document.getElementById('lat2').value);
+        const lon2 = parseFloat(document.getElementById('lon2').value);
+
+        let totalDistance = calculateDistance(lat1, lon1, lat2, lon2);
+        let totalSteps = calculateSteps(totalDistance);
+
+        // Include pitstops if any
+        const pitstops = document.querySelectorAll('.pitstop-input');
+        let lastLat = lat1;
+        let lastLon = lon1;
+
+        pitstops.forEach((input, index) => {
+            const latB = parseFloat(input.querySelector('.pitstop-lat').value);
+            const lonB = parseFloat(input.querySelector('.pitstop-lon').value);
+
+            const distanceAB = calculateDistance(lastLat, lastLon, latB, lonB);
+            const stepsAB = calculateSteps(distanceAB);
+
+            totalDistance += distanceAB;
+            totalSteps += stepsAB;
+
+            lastLat = latB;
+            lastLon = lonB;
+        });
+
+        const distanceBC = calculateDistance(lastLat, lastLon, lat2, lon2);
+        const stepsBC = calculateSteps(distanceBC);
+
+        totalDistance += distanceBC;
+        totalSteps += stepsBC;
+
+        // Calculate estimated calories burned
+        const caloriesBurned = calculateCalories(totalSteps);
+
+        // Display the results
+        const resultDiv = document.getElementById('distanceResult');
+        resultDiv.innerHTML = `Total Distance: ${totalDistance.toFixed(2)} km<br>Total Steps: ${totalSteps.toFixed(0)}`;
+
+        // Display calories burned
+        const caloriesDiv = document.getElementById('calories-burned');
+        caloriesDiv.innerHTML = `${caloriesBurned.toFixed(0)} kcal`;
+    });
+
+    // Function to add pitstop input fields
+    document.getElementById('addPitstopBtn').addEventListener('click', function() {
+        const pitstopDiv = document.createElement('div');
+        pitstopDiv.classList.add('pitstop-input');
+        pitstopDiv.innerHTML = `
+            <label for="pitstopLat">Pitstop Latitude:</label>
+            <input type="number" class="pitstop-lat" step="any" required>
+            <label for="pitstopLon">Pitstop Longitude:</label>
+            <input type="number" class="pitstop-lon" step="any" required>
+        `;
+        document.getElementById('pitstopInputs').appendChild(pitstopDiv);
+    });
+</script>
+
+</body>
+</html>

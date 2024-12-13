@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Sidebar</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      /* Profile Tab Styles */
+      .profile-sidebar {
+        width: 250px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-y: auto;
+      }
+
+      .profile-sidebar img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 20px;
+      }
+
+      .profile-sidebar h2 {
+        font-size: 1.2em;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .profile-sidebar .menu {
+        list-style-type: none;
+        padding: 0;
+        width: 100%;
+      }
+
+      .profile-sidebar .menu li {
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+        margin: 8px 0;
+        background-color: #f8f8f8;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        box-sizing: border-box; /* Ensure padding is included in width calculation */
+      }
+
+      .profile-sidebar .menu li:hover {
+        background-color: #007bff;
+        color: white;
+      }
+
+      .profile-sidebar .menu li a {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        width: 100%;
+      }
+
+      .profile-sidebar .menu li:active {
+        background-color: #0056b3;
+      }
+
+      #prem {
+        color: gold;
+      }
+
+      .back-button {
+        background-color: #007bff;
+        color: white;
+        border-radius: 15px;
+        /* border-color: ; */
+        border-style: none;
+        width: 70px;
+        height: 30px;
+      }
+
+      .back-button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="profile-sidebar">
+      <!-- Profile Picture -->
+      <!-- <img src="Sharuya.JPG" alt="Profile Picture" /> -->
+
+      <!-- Profile Name -->
+      <!-- <h2 id="user-name">Shaurya Singh</h2> -->
+
+      <!-- Navigation Menu -->
+      <ul class="menu">
+        <li>Weight: 160 lbs</li>
+        <li>Height: 5 ft 9 in</li>
+        <li>Performance: Get Stronger</li>
+        <li>Difficulty: Hard</li>
+      </ul>
+      <button class="back-button" onclick="goBack()">
+        &#8592;
+        <!-- Left Arrow Symbol -->
+      </button>
+    </div>
+
+    <script>
+      // Function to go back to the previous page
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+  </body>
+</html>
