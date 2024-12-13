@@ -1,3 +1,5 @@
+# Please download the videos PDF to see our group's videos. Thanks.
+
 # UWAFT-Highschool-Hackathon-2024
 
 ##DESCRIPTION 
